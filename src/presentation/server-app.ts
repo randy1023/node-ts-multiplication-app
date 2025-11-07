@@ -1,12 +1,11 @@
-import { CreateTable } from "../domain/use-cases/create-table.use-case";
-import { SaveFile } from "../domain/use-cases/save-file.use.case";
+import { CreateTable, SaveFile } from '../domain/use-cases'
 
 interface RunOptions {
-  base: number;
-  limit: number;
-  showTable: boolean;
-  fileName: string;
-  fileDestination: string;
+  base: number
+  limit: number
+  showTable: boolean
+  fileName: string
+  fileDestination: string
 }
 
 export class ServerApp {
@@ -17,18 +16,18 @@ export class ServerApp {
     fileName,
     fileDestination,
   }: RunOptions) {
-    console.log("Server running....");
+    console.log('Server running....')
 
-    const table = new CreateTable().execute({ base, limit });
+    const table = new CreateTable().execute({ base, limit })
 
     const fileWasCreated = new SaveFile().execute({
       fileContent: table,
       fileName,
       fileDestination,
-    });
+    })
     fileWasCreated
-      ? console.log("File Created!")
-      : console.error("File Not created");
-    showTable && console.log(table);
+      ? console.log('File Created!')
+      : console.error('File Not created')
+    showTable && console.log(table)
   }
 }
